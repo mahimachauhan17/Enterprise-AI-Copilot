@@ -316,8 +316,7 @@ This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) f
 
 **Mahima Chauhan**
 - 🐙 GitHub: [@mahimachauhan17](https://github.com/mahimachauhan17)
-- 💼 LinkedIn: [Your Profile Placeholder](https://linkedin.com/)
-- 📧 Email: [Your Email Placeholder]
+
 
 ---
 
