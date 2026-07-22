@@ -1,0 +1,444 @@
+/* ============================================
+   Chat Interface & Main Dashboard Area
+   Axora-inspired glass input & AI orb
+   ============================================ */
+
+.chat-container {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    position: relative;
+    z-index: 1;
+}
+
+.chat-messages {
+    max-width: var(--max-chat-width);
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-bottom: 2rem; /* space above input */
+}
+
+/* --- Empty State & Reference AI Orb --- */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+    padding: 2rem;
+    animation: fadeIn 0.8s var(--ease-out-expo) both;
+}
+
+/* 3D Morphing Glowing Orb matching reference */
+.ai-orb-container {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ai-orb {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    background: radial-gradient(circle at 30% 30%, #fff, #a855f7 30%, #3b82f6 60%, #172554 90%);
+    border-radius: 50%;
+    box-shadow: 
+        0 0 40px rgba(168, 85, 247, 0.4),
+        0 0 80px rgba(59, 130, 246, 0.2),
+        inset -10px -10px 20px rgba(0, 0, 0, 0.5),
+        inset 10px 10px 20px rgba(255, 255, 255, 0.5);
+    animation: float 6s ease-in-out infinite, orbMorph 12s linear infinite;
+    z-index: 2;
+}
+
+/* Reflection / Bloom behind orb */
+.ai-orb-glow {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.6) 0%, rgba(59, 130, 246, 0.4) 40%, transparent 70%);
+    filter: blur(25px);
+    z-index: 1;
+    animation: pulseGlow 4s ease-in-out infinite alternate;
+}
+
+.empty-state h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: -0.02em;
+}
+
+.empty-state .greeting-accent {
+    background: linear-gradient(90deg, #a855f7, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 600;
+}
+
+/* Suggestion Cards styled like reference */
+.suggestion-chips {
+    display: flex;
+    gap: 1.25rem;
+    justify-content: center;
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
+.suggestion-chip {
+    flex: 1;
+    max-width: 250px;
+    padding: 1.5rem;
+    background: rgba(20, 20, 30, 0.4);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    text-align: left;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.suggestion-chip:hover {
+    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+.suggestion-chip-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.25rem;
+}
+
+/* Different gradients for each chip icon based on child order */
+.suggestion-chip:nth-child(1) .suggestion-chip-icon {
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+.suggestion-chip:nth-child(2) .suggestion-chip-icon {
+    background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);
+}
+.suggestion-chip:nth-child(3) .suggestion-chip-icon {
+    background: linear-gradient(135deg, #ec4899, #f472b6);
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+}
+
+.suggestion-chip-icon svg {
+    width: 20px;
+    height: 20px;
+    color: white;
+}
+
+.suggestion-chip-title {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.suggestion-chip-desc {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.suggestion-chip-arrow {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.5);
+    transition: all var(--transition-fast);
+}
+
+.suggestion-chip:hover .suggestion-chip-arrow {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    transform: translateX(2px);
+}
+
+/* --- Chat Input Area matching Axora --- */
+.chat-input-area {
+    padding: 1rem 1.5rem 2rem;
+    background: transparent;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 20;
+    width: 100%;
+}
+
+.chat-input-wrapper {
+    max-width: var(--max-chat-width);
+    margin: 0 auto;
+    background: rgba(15, 15, 25, 0.6);
+    backdrop-filter: blur(30px) saturate(1.5);
+    -webkit-backdrop-filter: blur(30px) saturate(1.5);
+    border-radius: 20px;
+    padding: 1rem 1.25rem;
+    position: relative;
+    transition: all var(--transition-base);
+    /* The glowing border from the reference */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.chat-input-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 21px;
+    background: linear-gradient(135deg, rgba(147, 51, 234, 0.4), transparent 40%, transparent 60%, rgba(59, 130, 246, 0.3));
+    z-index: -1;
+    pointer-events: none;
+    transition: opacity var(--transition-base);
+}
+
+.chat-input-wrapper:focus-within::before {
+    background: linear-gradient(135deg, rgba(147, 51, 234, 0.8), transparent 30%, transparent 70%, rgba(59, 130, 246, 0.6));
+}
+
+.chat-input-wrapper:focus-within {
+    transform: translateY(-2px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* Input layout */
+.chat-input-top {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.chat-input {
+    flex: 1;
+    resize: none;
+    border: none;
+    background: transparent;
+    color: #fff;
+    font-size: 1rem;
+    line-height: 1.5;
+    min-height: 24px;
+    max-height: 200px;
+    padding: 0;
+}
+
+.chat-input::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.chat-input-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chat-input-tools {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.tool-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    transition: all var(--transition-fast);
+}
+
+.tool-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.tool-btn.icon-only {
+    padding: 0.4rem;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    justify-content: center;
+}
+
+.tool-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.chat-input-actions-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Redesigned send button to match the modern mic/equalizer aesthetic or act as the submit */
+.send-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.chat-input-wrapper:focus-within .send-btn:not(:disabled) {
+    background: linear-gradient(135deg, #4f46e5, #9333ea);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 0 15px rgba(147, 51, 234, 0.5);
+}
+
+.send-btn:not(:disabled):hover {
+    transform: scale(1.05);
+}
+
+.send-btn:disabled {
+    cursor: not-allowed;
+}
+
+.send-btn svg { width: 14px; height: 14px; }
+
+
+/* --- Message Bubbles --- */
+.message {
+    display: flex;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    opacity: 0;
+}
+
+.message.user {
+    flex-direction: row-reverse;
+}
+
+.message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-top: 4px;
+}
+
+.message.assistant .message-avatar {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+.message.user .message-avatar {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.message-content {
+    max-width: 85%;
+    min-width: 0;
+}
+
+.message-bubble {
+    padding: 1rem 1.25rem;
+    border-radius: 16px;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    position: relative;
+    word-wrap: break-word;
+}
+
+/* User bubble matches the gradient style */
+.message.user .message-bubble {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.8), rgba(147, 51, 234, 0.8));
+    color: white;
+    border-bottom-right-radius: 4px;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.2);
+}
+
+/* AI bubble glassmorphism */
+.message.assistant .message-bubble {
+    background: rgba(20, 20, 30, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.9);
+    border-bottom-left-radius: 4px;
+}
+
+/* Markdown typography for AI */
+.message.assistant .message-bubble h1,
+.message.assistant .message-bubble h2,
+.message.assistant .message-bubble h3 { margin-top: 1.25rem; margin-bottom: 0.5rem; font-weight: 600; color: #fff; }
+.message.assistant .message-bubble p { margin-bottom: 0.85rem; }
+.message.assistant .message-bubble p:last-child { margin-bottom: 0; }
+.message.assistant .message-bubble ul,
+.message.assistant .message-bubble ol { margin: 0.75rem 0; padding-left: 1.5rem; }
+.message.assistant .message-bubble code { background: rgba(0,0,0,0.5); padding: 0.2rem 0.4rem; border-radius: 6px; font-family: var(--font-mono); font-size: 0.85em; border: 1px solid rgba(255,255,255,0.05); }
+.message.assistant .message-bubble pre { background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 1.25rem; margin: 1rem 0; overflow-x: auto; position: relative; }
+.message.assistant .message-bubble pre code { background: none; padding: 0; border: none; font-size: 0.85rem; }
+
+/* Typing & Stream */
+.typing-indicator { display: none; padding: 0.5rem 0; opacity: 0; }
+.typing-indicator.active { display: flex; animation: fadeIn 0.3s ease forwards; }
+.typing-dots { display: flex; gap: 4px; padding: 1rem 1.25rem; background: rgba(20, 20, 30, 0.5); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; border-bottom-left-radius: 4px; }
+.typing-dot { width: 6px; height: 6px; border-radius: 50%; background: #a855f7; animation: typingBounce 1.4s var(--ease-out-expo) infinite; }
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+.streaming-cursor::after {
+    content: ''; display: inline-block; width: 8px; height: 14px; background: #a855f7; animation: blink 0.8s step-end infinite; vertical-align: text-bottom; margin-left: 4px; border-radius: 2px;
+}
+
+/* Source citations */
+.source-citations { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+.source-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 0.75rem 1rem; cursor: pointer; transition: all var(--transition-fast); }
+.source-card:hover { border-color: rgba(255, 255, 255, 0.15); background: rgba(255, 255, 255, 0.05); }
+
+/* Responsive */
+@media (max-width: 768px) {
+    .suggestion-chips { flex-direction: column; align-items: center; }
+    .suggestion-chip { max-width: 100%; width: 100%; }
+    .chat-input-wrapper { border-radius: 16px; padding: 0.75rem 1rem; }
+}

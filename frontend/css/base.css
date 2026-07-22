@@ -1,0 +1,233 @@
+/* ============================================
+   Base Styles & Design Tokens
+   Deep Neon & Nebula Aesthetic
+   ============================================ */
+
+:root {
+    /* Color Palette - Deep Space & Neon */
+    --bg-primary: #030308;
+    --bg-secondary: #0a0a14;
+    --bg-surface: rgba(15, 15, 25, 0.4);
+    --bg-hover: rgba(255, 255, 255, 0.05);
+    --bg-active: rgba(255, 255, 255, 0.08);
+
+    --primary: #4f46e5;
+    --primary-light: #818cf8;
+    --primary-glow: rgba(79, 70, 229, 0.4);
+    
+    --accent: #c026d3;
+    --accent-light: #e879f9;
+    --accent-glow: rgba(192, 38, 211, 0.4);
+
+    --neon-blue: #0ea5e9;
+    --neon-purple: #9333ea;
+    --neon-pink: #ec4899;
+
+    --text-primary: #ffffff;
+    --text-secondary: #a1a1aa;
+    --text-tertiary: #71717a;
+
+    --border-primary: rgba(255, 255, 255, 0.08);
+    --border-secondary: rgba(255, 255, 255, 0.04);
+    --border-hover: rgba(255, 255, 255, 0.15);
+
+    /* Glassmorphism */
+    --glass-bg: rgba(10, 10, 20, 0.6);
+    --glass-bg-strong: rgba(10, 10, 20, 0.85);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --glass-highlight: rgba(255, 255, 255, 0.03);
+
+    /* Status Colors */
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --info: #3b82f6;
+
+    /* Message Bubbles */
+    --msg-user-bg: linear-gradient(135deg, rgba(79, 70, 229, 0.8), rgba(147, 51, 234, 0.8));
+    --msg-ai-bg: var(--glass-bg);
+    --msg-ai-border: var(--glass-border);
+    --code-bg: rgba(0, 0, 0, 0.4);
+
+    /* Typography */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', Consolas, monospace;
+
+    /* Layout & Sizing */
+    --sidebar-width: 280px;
+    --header-height: 72px;
+    --max-chat-width: 850px;
+
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-2xl: 32px;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+    --shadow-xl: 0 24px 60px rgba(0, 0, 0, 0.6);
+    --shadow-glow: 0 0 30px var(--primary-glow);
+
+    /* Transitions & Easings */
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-base: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* ==========================================
+   CSS Reset & Base
+   ========================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button, input, textarea, select {
+    font-family: inherit;
+    outline: none;
+}
+
+button {
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-hover);
+    border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-tertiary);
+}
+
+/* ==========================================
+   Global Animations
+   ========================================== */
+
+/* Fade Ins */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Auth Floating Icons Orbit */
+@keyframes orbit {
+    from { transform: rotate(0deg) translateX(180px) rotate(0deg); }
+    to   { transform: rotate(360deg) translateX(180px) rotate(-360deg); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@keyframes pulseGlow {
+    0%, 100% { filter: drop-shadow(0 0 15px rgba(147, 51, 234, 0.4)); }
+    50% { filter: drop-shadow(0 0 30px rgba(147, 51, 234, 0.8)); }
+}
+
+/* Aurora Background */
+@keyframes auroraSweep {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Dashboard AI Orb */
+@keyframes orbMorph {
+    0%   { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+    34%  { border-radius: 70% 30% 50% 50% / 30% 30% 70% 70%; }
+    67%  { border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%; }
+    100% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; }
+}
+
+@keyframes orbRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Light Rays */
+@keyframes lightRay {
+    0% { opacity: 0; transform: translateY(0) scaleY(1); }
+    50% { opacity: 0.5; transform: translateY(-50px) scaleY(1.5); }
+    100% { opacity: 0; transform: translateY(-100px) scaleY(1); }
+}
+
+/* Utility Classes */
+.animate-fade-in { animation: fadeIn 0.6s var(--ease-out-expo) forwards; }
+.animate-fade-in-up { animation: fadeInUp 0.6s var(--ease-out-expo) forwards; opacity: 0; }
+.animate-scale-in { animation: scaleIn 0.5s var(--ease-out-expo) forwards; opacity: 0; }
+
+.animate-delay-1 { animation-delay: 0.1s; }
+.animate-delay-2 { animation-delay: 0.2s; }
+.animate-delay-3 { animation-delay: 0.3s; }
+.animate-delay-4 { animation-delay: 0.4s; }
+.animate-delay-5 { animation-delay: 0.5s; }
+
+.glass-panel {
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    border: 1px solid var(--glass-border);
+}

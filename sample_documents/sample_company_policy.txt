@@ -1,0 +1,96 @@
+COMPANY POLICY DOCUMENT
+========================
+
+Acme Corporation — Employee Handbook (2025 Edition)
+
+1. LEAVE POLICY
+---------------
+
+1.1 Annual Leave
+All full-time employees are entitled to 24 days of paid annual leave per calendar year. Leave accrues at 2 days per month of service. Unused leave may be carried forward up to a maximum of 10 days into the next calendar year. Any leave beyond the carry-forward limit will be forfeited.
+
+1.2 Sick Leave
+Employees are entitled to 12 days of paid sick leave per year. A medical certificate is required for absences exceeding 2 consecutive working days. Unused sick leave cannot be carried forward or encashed.
+
+1.3 Maternity & Paternity Leave
+Female employees are entitled to 26 weeks of paid maternity leave. Male employees are entitled to 2 weeks of paid paternity leave. These must be availed within 6 months of the child's birth.
+
+1.4 Public Holidays
+The company observes 12 public holidays per year as per the regional calendar. The list is published at the beginning of each calendar year.
+
+
+2. WORK FROM HOME POLICY
+--------------------------
+
+2.1 Eligibility
+All employees who have completed their probation period (90 days) are eligible for work from home arrangements. Interns and probationary employees must work from the office.
+
+2.2 Remote Work Days
+Employees may work from home up to 3 days per week. The remaining 2 days must be spent in the office for collaboration and team meetings. Managers may adjust this ratio based on project needs.
+
+2.3 Core Hours
+Regardless of location, all employees must be available during core hours: 10:00 AM to 4:00 PM in their local time zone. Employees are expected to maintain a stable internet connection and a professional working environment.
+
+2.4 Equipment
+The company provides a laptop and necessary peripherals. Employees are responsible for maintaining a suitable home office setup including a desk, chair, and reliable internet connection (minimum 50 Mbps).
+
+2.5 Communication
+Employees working from home must be reachable via Slack, email, and video conferencing tools during core hours. Response time should not exceed 30 minutes during working hours.
+
+
+3. COMPENSATION & BENEFITS
+----------------------------
+
+3.1 Salary Reviews
+Performance-based salary reviews are conducted annually in April. Increments range from 5% to 20% based on performance ratings and market benchmarks.
+
+3.2 Bonus
+An annual performance bonus of up to 15% of the annual CTC is awarded based on individual and company performance. Bonuses are paid in May.
+
+3.3 Health Insurance
+The company provides comprehensive health insurance covering the employee, spouse, and up to 2 dependent children. Coverage includes hospitalization, outpatient care, dental, and vision benefits up to $50,000 per year.
+
+3.4 Retirement Benefits
+The company contributes 12% of the basic salary to the employee's retirement fund. Employees may opt for an additional voluntary contribution of up to 5%.
+
+
+4. CODE OF CONDUCT
+--------------------
+
+4.1 Professional Behavior
+All employees are expected to maintain the highest standards of professional conduct. Discrimination, harassment, and bullying are strictly prohibited and will result in immediate disciplinary action.
+
+4.2 Confidentiality
+Employees must not disclose proprietary information, trade secrets, or client data to unauthorized parties. A Non-Disclosure Agreement (NDA) is signed upon joining.
+
+4.3 Conflict of Interest
+Employees must disclose any potential conflicts of interest, including outside employment, investments, or relationships that could influence their work decisions.
+
+4.4 Use of Company Resources
+Company resources including equipment, software, and internet access are to be used primarily for business purposes. Limited personal use is acceptable but must not interfere with work responsibilities.
+
+
+5. PERFORMANCE MANAGEMENT
+---------------------------
+
+5.1 Goal Setting
+At the beginning of each quarter, employees and their managers set SMART goals aligned with departmental and company objectives.
+
+5.2 Reviews
+Formal performance reviews are conducted semi-annually in June and December. Continuous feedback is encouraged through monthly one-on-one meetings.
+
+5.3 Performance Improvement Plan (PIP)
+Employees receiving a "Below Expectations" rating will be placed on a 90-day Performance Improvement Plan with clear milestones and regular check-ins.
+
+
+6. TRAINING & DEVELOPMENT
+---------------------------
+
+6.1 Learning Budget
+Each employee receives an annual learning budget of $2,000 for courses, certifications, books, and conferences.
+
+6.2 Internal Training
+The company conducts monthly knowledge-sharing sessions and quarterly skill workshops. Attendance is encouraged but not mandatory.
+
+6.3 Mentorship Program
+New employees are paired with a senior mentor for their first 6 months. The mentor provides guidance on technical skills, company culture, and career development.

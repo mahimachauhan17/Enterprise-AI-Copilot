@@ -1,0 +1,475 @@
+/* ============================================
+   Auth Pages — Login & Signup
+   Exact matching of neon/glass reference
+   ============================================ */
+
+.auth-page {
+    min-height: 100vh;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+    background: #020008; /* Extremely dark base */
+}
+
+/* --- Immersive Neon Background --- */
+.auth-bg-fx {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Background sweeping lights */
+.auth-bg-fx::before,
+.auth-bg-fx::after {
+    content: '';
+    position: absolute;
+    width: 150vw;
+    height: 150vh;
+    top: -25vh;
+    left: -25vw;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(147, 51, 234, 0.15), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(14, 165, 233, 0.1), transparent 50%),
+        radial-gradient(circle at 50% 100%, rgba(236, 72, 153, 0.1), transparent 50%);
+    filter: blur(80px);
+    animation: auroraSweep 20s linear infinite;
+    opacity: 0.8;
+}
+
+.auth-bg-fx::after {
+    background: 
+        radial-gradient(circle at 70% 30%, rgba(79, 70, 229, 0.1), transparent 40%),
+        radial-gradient(circle at 30% 70%, rgba(192, 38, 211, 0.15), transparent 50%);
+    animation-duration: 25s;
+    animation-direction: reverse;
+}
+
+/* --- Left Panel: Glowing Hero --- */
+.auth-hero {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+/* The Hand Artwork */
+.hero-artwork-container {
+    position: relative;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Mouse parallax will be handled via CSS transform or JS if needed, but for now CSS float */
+    animation: float 8s ease-in-out infinite;
+    z-index: 2;
+}
+
+.hero-artwork {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* Glowing fingertips/bloom effect via CSS filters */
+    filter: drop-shadow(0 0 30px rgba(147, 51, 234, 0.4))
+            drop-shadow(0 0 80px rgba(14, 165, 233, 0.2))
+            brightness(1.1) contrast(1.1);
+    animation: pulseGlow 6s ease-in-out infinite;
+}
+
+/* Floating Orbiting Icons */
+.floating-icons {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    pointer-events: none;
+}
+
+.floating-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 48px;
+    height: 48px;
+    background: rgba(15, 15, 30, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 0 20px rgba(147, 51, 234, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.1);
+    /* The orbit animation logic */
+    margin-top: -24px;
+    margin-left: -24px;
+    transform-origin: center center;
+}
+
+.floating-icon svg {
+    width: 24px;
+    height: 24px;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+}
+
+/* We create multiple icons with different orbit radii by overriding the keyframe in line or creating variations */
+.floating-icon:nth-child(1) { animation: orbit1 15s linear infinite; }
+.floating-icon:nth-child(2) { animation: orbit2 20s linear infinite reverse; }
+.floating-icon:nth-child(3) { animation: orbit3 18s linear infinite; }
+.floating-icon:nth-child(4) { animation: orbit4 25s linear infinite reverse; }
+.floating-icon:nth-child(5) { animation: orbit5 22s linear infinite; }
+.floating-icon:nth-child(6) { animation: orbit6 19s linear infinite reverse; }
+
+@keyframes orbit1 { 0% { transform: rotate(0deg) translateX(220px) rotate(0deg); } 100% { transform: rotate(360deg) translateX(220px) rotate(-360deg); } }
+@keyframes orbit2 { 0% { transform: rotate(0deg) translateX(280px) rotate(0deg) scale(0.8); } 100% { transform: rotate(360deg) translateX(280px) rotate(-360deg) scale(0.8); } }
+@keyframes orbit3 { 0% { transform: rotate(120deg) translateX(240px) rotate(-120deg) scale(1.1); } 100% { transform: rotate(480deg) translateX(240px) rotate(-480deg) scale(1.1); } }
+@keyframes orbit4 { 0% { transform: rotate(180deg) translateX(300px) rotate(-180deg) scale(0.9); } 100% { transform: rotate(540deg) translateX(300px) rotate(-540deg) scale(0.9); } }
+@keyframes orbit5 { 0% { transform: rotate(240deg) translateX(200px) rotate(-240deg); } 100% { transform: rotate(600deg) translateX(200px) rotate(-600deg); } }
+@keyframes orbit6 { 0% { transform: rotate(300deg) translateX(260px) rotate(-300deg) scale(0.85); } 100% { transform: rotate(660deg) translateX(260px) rotate(-660deg) scale(0.85); } }
+
+/* Light Rays behind hand */
+.light-rays {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    z-index: 1;
+}
+
+.ray {
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to top, rgba(147, 51, 234, 0), rgba(147, 51, 234, 0.4), rgba(14, 165, 233, 0));
+    position: absolute;
+    bottom: -20%;
+    filter: blur(2px);
+    animation: lightRay 8s infinite;
+}
+.ray:nth-child(1) { left: 40%; transform: rotate(-20deg); animation-delay: 0s; }
+.ray:nth-child(2) { left: 50%; transform: rotate(0deg); animation-delay: 2s; height: 120%; }
+.ray:nth-child(3) { left: 60%; transform: rotate(20deg); animation-delay: 4s; }
+
+
+/* --- Right Panel: Auth Form --- */
+.auth-panel {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+/* Glassmorphism Auth Card */
+.auth-card {
+    width: 100%;
+    max-width: 440px;
+    padding: 3rem;
+    background: rgba(10, 10, 18, 0.6);
+    backdrop-filter: blur(40px) saturate(1.5);
+    -webkit-backdrop-filter: blur(40px) saturate(1.5);
+    border-radius: 28px;
+    position: relative;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Animated Border Glow */
+.auth-card::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #4f46e5, #9333ea, #ec4899);
+    z-index: -1;
+    opacity: 0.5;
+    filter: blur(4px);
+    animation: orbRotate 10s linear infinite;
+    /* Masking to only show border */
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    padding: 2px;
+}
+
+/* Header Area */
+.auth-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.auth-logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.auth-logo svg {
+    width: 42px;
+    height: 42px;
+    filter: drop-shadow(0 0 10px rgba(14, 165, 233, 0.5));
+}
+
+.auth-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+}
+
+.auth-header p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Tabs */
+.auth-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.auth-tab {
+    padding: 0.5rem 0;
+    color: var(--text-tertiary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    position: relative;
+    transition: color var(--transition-fast);
+}
+
+.auth-tab.active {
+    color: #fff;
+}
+
+.auth-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, #4f46e5, #9333ea);
+    box-shadow: 0 0 10px rgba(147, 51, 234, 0.8);
+}
+
+.auth-tab:hover:not(.active) {
+    color: var(--text-secondary);
+}
+
+/* Form Styles */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-group {
+    position: relative;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    color: var(--text-tertiary);
+    transition: color var(--transition-fast);
+    pointer-events: none;
+}
+
+.form-group:focus-within .input-icon {
+    color: var(--primary-light);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: white;
+    font-size: 0.95rem;
+    transition: all var(--transition-base);
+}
+
+.form-group input:focus {
+    border-color: rgba(147, 51, 234, 0.5);
+    background: rgba(147, 51, 234, 0.05);
+    box-shadow: 0 0 0 4px rgba(147, 51, 234, 0.1), inset 0 0 15px rgba(147, 51, 234, 0.05);
+}
+
+.form-group input::placeholder {
+    color: var(--text-tertiary);
+}
+
+.form-error {
+    font-size: 0.8rem;
+    color: var(--danger);
+    margin-top: 0.4rem;
+    display: none;
+}
+
+.form-group.error input {
+    border-color: var(--danger);
+}
+.form-group.error .form-error {
+    display: block;
+}
+
+/* Checkbox and links row */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.checkbox-group input {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    position: relative;
+}
+
+.checkbox-group input:checked {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.checkbox-group input:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 10px;
+}
+
+.forgot-link {
+    color: var(--primary-light);
+    transition: color var(--transition-fast);
+}
+
+.forgot-link:hover {
+    color: white;
+    text-shadow: 0 0 10px var(--primary-glow);
+}
+
+/* Gradient Submit Button */
+.auth-btn {
+    width: 100%;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    background: linear-gradient(90deg, #4f46e5, #9333ea);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    box-shadow: 0 10px 20px rgba(147, 51, 234, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.auth-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(147, 51, 234, 0.5);
+}
+
+.auth-btn:hover::before {
+    transform: translateX(100%);
+}
+
+.auth-btn:active {
+    transform: translateY(0);
+}
+
+.auth-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.btn-spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+    margin: 0 auto;
+}
+
+.auth-btn.loading .btn-text { display: none; }
+.auth-btn.loading .btn-spinner { display: block; }
+
+/* Strength meter */
+.password-strength {
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.password-strength-bar {
+    height: 100%;
+    width: 0%;
+    border-radius: 2px;
+    transition: all var(--transition-base);
+}
+.password-strength-bar.weak { width: 33%; background: var(--danger); box-shadow: 0 0 10px var(--danger); }
+.password-strength-bar.medium { width: 66%; background: var(--warning); box-shadow: 0 0 10px var(--warning); }
+.password-strength-bar.strong { width: 100%; background: var(--success); box-shadow: 0 0 10px var(--success); }
+
+/* Responsive */
+@media (max-width: 960px) {
+    .auth-page {
+        flex-direction: column;
+    }
+    .auth-hero {
+        display: none; /* Hide complex hero on small screens */
+    }
+    .auth-panel {
+        min-height: 100vh;
+    }
+}
